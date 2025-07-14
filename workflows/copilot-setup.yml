@@ -1,0 +1,34 @@
+name: Copilot Workflow
+on:
+  issues:
+    types: [opened, assigned]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: galaxy-renderer-restructure  # Use your specific branch
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Copilot environment
+        run: |
+          echo "Repository checked out for Copilot access"
+          echo "Files available in workspace"
+          ls -la apps/frontend/src/views/render/
+        
+      # Add any other setup steps here before firewall restrictions
+      
+      - name: Enable firewall (if you have custom firewall setup)
+        run: |
+          # Your firewall configuration here
+          echo "Firewall configured"
